@@ -10,8 +10,7 @@ struct Node {
 
 class BBST {
     
-public:
-    BBST() {
+public: BBST() {
         root = nullptr;
     }
 
@@ -26,6 +25,31 @@ public:
     void printInorder() {
         printInorderHelper(root);
         cout << endl;
+    }
+    void printPreorder(Node* node) {
+        if (node == nullptr) {
+            return;
+        }
+        std::cout << node->data << " ";
+        printPreorder(node->left);
+        printPreorder(node->right);
+    }
+
+    void printPreorder() {
+        printPreorder(root);
+    }
+
+    void printPostorder(Node* node) {
+        if (node == nullptr) {
+            return;
+        }
+        printPostorder(node->left);
+        printPostorder(node->right);
+        std::cout << node->data << " ";
+    }
+
+    void printPostorder() {
+        printPostorder(root);
     }
 
 private:
@@ -191,17 +215,23 @@ static void printInorderHelper(Node* node) {
 };
 int main() {
     BBST tree;
+    //options to remove or insert some values to the tree
     tree.insert(10);
     tree.insert(20);
     tree.insert(30);
     tree.insert(40);
     tree.insert(50);
-    cout << "Inorder traversal of the constructed tree is: ";
-    tree.printInorder();
 
     tree.remove(20);
-
-    cout << "Inorder traversal of the modified tree is: ";
+    // Print tree in inorder, preorder and postorder
+    cout << "Inorder tree: ";
     tree.printInorder();
+    std::cout << std::endl;
+    cout << "Preorder tree: ";
+    tree.printPreorder();
+    std::cout << std::endl;
+    cout << "Postorder tree: ";
+    tree.printPostorder();
+    std::cout << std::endl;
 }
 
